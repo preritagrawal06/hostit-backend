@@ -4,15 +4,16 @@ const fs = require('fs')
 const {S3Client, PutObjectCommand} = require('@aws-sdk/client-s3')
 const mime = require('mime-types')
 const Redis = require('ioredis')
+require('dotenv').config()
 
 
-const publisher = new Redis('rediss://default:AVNS_IPyjew4UR0U3pRzxoYo@redis-f1a132f-agrawalprerit780-dc46.a.aivencloud.com:10748')
+const publisher = new Redis(process.env.REDIS_URI)
 
 const s3Client = new S3Client({
-    region:'ap-south-1',
+    region:process.env.REGION,
     credentials:{
-        accessKeyId:'AKIA2UC3ATFWFRUW5N4W',
-        secretAccessKey:'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'
+        accessKeyId:process.env.ACCESS_ID,
+        secretAccessKey:process.env.ACCESS_KEY
     }
 })
 
