@@ -66,8 +66,12 @@ const initKafkaConsumer = async()=>{
     })
 }
 
-initKafkaConsumer()
-updateDeployment()
+try {
+    initKafkaConsumer()
+    updateDeployment()
+} catch (error) {
+    console.log(error.message);
+}
 
 // io.listen(9002, ()=>{console.log('socket server running on port: 9002')})
 app.listen(PORT, ()=>{console.log(`api-server running on port: ${PORT}`)})
