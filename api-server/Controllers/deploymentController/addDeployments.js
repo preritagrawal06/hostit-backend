@@ -62,7 +62,7 @@ const addDeployments = async (req, res, next) => {
                   },
                   {
                     name: "PROJECT_ID",
-                    value: projectId,
+                    value: project.subDomain,
                   },
                   {
                     name: "DEPLOYEMENT_ID",

@@ -7,13 +7,7 @@ const prisma = new PrismaClient({})
 const addProject = async(req, res, next)=>{
     const schema = z.object({
         name: z.string(),
-        gitUrl: z.string(),
-        build: z.string(),
-        directory: z.string(),
-        env: z.array(z.object({
-            key: z.string(),
-            value: z.string()
-        }).optional())
+        gitUrl: z.string()
     })
     const safeParseResult = schema.safeParse(req.body)
     if(safeParseResult.error){
@@ -24,7 +18,7 @@ const addProject = async(req, res, next)=>{
         })
     }
 
-    const {name, gitUrl, build, directory, env} = safeParseResult.data
+    const {name, gitUrl} = safeParseResult.data
 
     const userId = await req.user.id
     try {
