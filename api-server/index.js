@@ -29,7 +29,9 @@ io.on('connection', (socket)=>{
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: "*"
+}))
 const PORT = process.env.PORT || 9000
 
 const projectRouter = require('./Routers/project.routes')

@@ -15,7 +15,7 @@ const prisma = new PrismaClient({});
 const addDeployments = async (req, res, next) => {
     let deployment;
     try {
-        const { projectId, envs } = req.body;
+        const { projectId, envs, overrides } = req.body;
       
         const project = await prisma.project.findUnique({where: {id: projectId} });
       
@@ -55,6 +55,7 @@ const addDeployments = async (req, res, next) => {
                 name: process.env.IMAGE_NAME,
                 environment: [
                   ...envs,
+                  ...overrides,
                   {
                     name: "GIT_REPOSITORY_URL",
                     value: project.gitURL,
