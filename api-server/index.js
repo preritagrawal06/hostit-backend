@@ -1,5 +1,4 @@
 const express = require('express')
-const {Server} = require('socket.io')
 const cors = require('cors')
 require('dotenv').config()
 const {v4: uuidv4} = require('uuid')
@@ -18,14 +17,6 @@ healthCheck()
 
 const consumer = kafka.consumer({groupId: 'api-server-logs-consumer'})
 
-io = new Server({cors:"*"})
-
-io.on('connection', (socket)=>{
-    socket.on('subscribe', channel=>{
-        socket.join(channel)
-        socket.emit('message', `joined ${channel}`)
-    })
-})
 
 const app = express()
 app.use(express.json())

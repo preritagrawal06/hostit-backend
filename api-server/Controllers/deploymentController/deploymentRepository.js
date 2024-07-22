@@ -1,9 +1,11 @@
 const {PrismaClient} = require('@prisma/client')
+const redis = require('../../redisConfig')
 
 const prisma = new PrismaClient({})
 
 const getDeploymentsByProjectId = async(projectId) => {
     const deployments = await prisma.deployement.findMany({where: {projectId: projectId}})
+    redis.set(`deployments-${projectId}`, JSON.stringify(deployments))
     return deployments
 }
 

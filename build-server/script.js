@@ -45,7 +45,7 @@ async function init(){
     console.log('Executing script.js....')
     await publishLog('Build Started...')
     const outDirPath = path.join(__dirname, 'output')
-    const p = exec(`cd ${outDirPath} && npm install && npm run build`)
+    const p = process.env.pkgmngr === "npm" ? exec(`cd ${outDirPath} && npm install && npm run build`) : exec(`cd ${outDirPath} && npm install --global yarn && yarn install && yarn run build`)
 
     p.stdout.on('data', async (data)=>{
         console.log(data.toString())
@@ -61,7 +61,7 @@ async function init(){
     p.on('close', async ()=>{
         await publishLog("Build complete...")
         console.log("Build complete")
-        const distDirPath = path.join(__dirname, 'output', 'dist');
+        const distDirPath = process.env.directory.length > 0 ? path.join(__dirname, 'output', process.env.directory) : path.join(__dirname, 'output');
         const distDirContents = fs.readdirSync(distDirPath, {recursive: true}) //recursive true traverse the sub folders to find the files
 
         await publishLog("Starting to upload to bucket...")
