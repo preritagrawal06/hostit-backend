@@ -20,6 +20,7 @@ proxy.on('proxyReq', (proxyReq, req, res)=>{
     if(url === '/') proxyReq.path += 'index.html'
 })
 
+app.use('/', (req, res, next)=>{res.json({message: "everything is fine"})})
 app.use(pathRedirect)
 
 app.listen(PORT, ()=>{console.log( `Reverse proxy running on PORT: ${PORT}`)})
