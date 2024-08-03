@@ -21,7 +21,7 @@ const consumer = kafka.consumer({groupId: 'api-server-logs-consumer'})
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: "*"
+    origin: ["*", "https://hostit-frontend.vercel.app", "https://hostit.preritagrawal.in"]
 }))
 const PORT = process.env.PORT || 9000
 
