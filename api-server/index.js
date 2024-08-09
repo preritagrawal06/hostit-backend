@@ -19,15 +19,16 @@ const consumer = kafka.consumer({groupId: 'api-server-logs-consumer'})
 
 
 const app = express()
-app.use(express.json())
+app.options('*', cors());
 app.use(cors({
     origin: ["http://localhost:5173", "https://hostit-frontend.vercel.app", "https://hostit.preritagrawal.in"]
 }))
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
+app.use(express.json())
   
 const PORT = process.env.PORT || 9000
 
