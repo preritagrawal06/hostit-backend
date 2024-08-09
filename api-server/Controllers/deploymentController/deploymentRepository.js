@@ -3,7 +3,7 @@ const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient({})
 
 const getDeploymentsByProjectId = async(projectId) => {
-    const deployments = await prisma.deployement.findMany({where: {projectId: projectId}})
+    const deployments = await prisma.deployement.findMany({where: {projectId: projectId}, orderBy: {createdAt:'desc'}})
     return deployments
 }
 
