@@ -20,7 +20,7 @@ const consumer = kafka.consumer({groupId: 'api-server-logs-consumer'})
 
 const app = express()
 app.use(cors({
-    origin: ["http://localhost:5173", "https://hostit-frontend.vercel.app", "https://hostit.preritagrawal.in"],
+    origin: "*",
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
